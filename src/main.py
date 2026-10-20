@@ -28,6 +28,12 @@ def filter_prices(prices, ticker):
             result.append(row)
     return result
 
+def get_first_date(prices):
+    return prices[0]["date"]
+
+
+def get_last_date(prices):
+    return prices[-1]["date"]
 
 def get_first_close(prices):
     """Renvoie le premier cours de clôture, converti en nombre."""
@@ -43,11 +49,15 @@ def display_market_summary(asset, prices, show_currency=True):
     """Affiche le résumé d'une série (instrument ou benchmark)."""
     first_close = get_first_close(prices)
     last_close = get_last_close(prices)
+    first_date = get_first_date(prices)
+    last_date = get_last_date(prices)
 
     currency = f" {asset['currency']}" if show_currency else ""
 
     print(f"{asset['ticker']} - {asset['name']}")
     print(f"Observations : {len(prices)}")
+    print(f"First date   : {first_date}")
+    print(f"Last date    : {last_date}")
     print(f"First close  : {first_close:.2f}{currency}")
     print(f"Last close   : {last_close:.2f}{currency}")
 
