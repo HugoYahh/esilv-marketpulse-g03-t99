@@ -1,2 +1,0 @@
-## EVIDENCES FOR TD7
-
