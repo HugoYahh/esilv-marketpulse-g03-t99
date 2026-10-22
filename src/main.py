@@ -1,5 +1,6 @@
 import csv
 import json
+from src import analytics
 from pathlib import Path
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data" / "sample"
