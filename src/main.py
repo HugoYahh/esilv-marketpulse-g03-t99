@@ -6,6 +6,7 @@ DATA_DIR = Path(__file__).resolve().parent.parent / "data" / "sample"
 
 PERIOD = "1 month"
 INTERVAL = "Daily"
+PROVIDER = "Local sample (CSV / JSON)"
 
 
 def load_instruments():
@@ -76,6 +77,7 @@ def main():
     print("=== MarketPulse ===")
     print()
     print("Market configuration")
+    print(f"Provider : {PROVIDER}")
     print(f"Period   : {PERIOD}")
     print(f"Interval : {INTERVAL}")
     print()
