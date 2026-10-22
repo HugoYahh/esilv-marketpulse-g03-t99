@@ -55,12 +55,12 @@ def display_market_summary(asset, prices, show_currency=True):
     currency = f" {asset['currency']}" if show_currency else ""
 
     print(f"{asset['ticker']} - {asset['name']}")
+    print(f"Market       : {asset['market']}")
     print(f"Observations : {len(prices)}")
     print(f"First date   : {first_date}")
     print(f"Last date    : {last_date}")
     print(f"First close  : {first_close:.2f}{currency}")
     print(f"Last close   : {last_close:.2f}{currency}")
-
 
 def main():
     
