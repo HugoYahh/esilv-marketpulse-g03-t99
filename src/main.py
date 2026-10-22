@@ -1,6 +1,6 @@
 import csv
 import json
-from src import analytics
+import analytics
 from pathlib import Path
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data" / "sample"
@@ -87,6 +87,8 @@ def main():
     print()
     print("Benchmark")
     display_market_summary(benchmark, benchmark_prices, show_currency=False)
+
+    print(analytics.index_by_date(prices))
 
 
 if __name__ == "__main__":
