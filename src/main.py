@@ -1,5 +1,6 @@
 import csv
 import json
+
 from analytics import (
     index_by_date,
     align_series,
@@ -7,14 +8,17 @@ from analytics import (
     calculate_base_100,
     calculate_relative_performance,
 )
+from providers.yahoo_provider import fetch_yahoo_prices
 from pathlib import Path
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data" / "sample"
 
 PERIOD = "1 month"
 INTERVAL = "Daily"
-PROVIDER = "Local sample (CSV / JSON)"
-
+PROVIDER = "yahoo"   
+# parameters for Yahoo Finance API
+YAHOO_LOOKBACK = "1mo"  
+YAHOO_INTERVAL = "1d"   
 
 def load_instruments():
     """Lit instruments.json et renvoie un dictionnaire."""
@@ -35,6 +39,15 @@ def filter_prices(prices, ticker):
         if row["ticker"] == ticker:
             result.append(row)
     return result
+
+#Function to get prices from the chosen provider
+def get_prices(ticker):
+    """Renvoie les lignes canoniques d'un ticker, selon le provider choisi."""
+    if PROVIDER == "yahoo":
+        return fetch_yahoo_prices(ticker, YAHOO_LOOKBACK, YAHOO_INTERVAL)
+    if PROVIDER == "csv":
+        return filter_prices(load_prices(), ticker)
+    raise ValueError(f"Provider inconnu : {PROVIDER}")
 
 def get_first_date(prices):
     return prices[0]["date"]
@@ -73,13 +86,13 @@ def display_market_summary(asset, prices, show_currency=True):
 def main():
     
     instruments = load_instruments()
-    prices = load_prices()
 
     instrument = instruments["instrument"]
     benchmark = instruments["benchmark"]
 
-    instrument_prices = filter_prices(prices, instrument["ticker"])
-    benchmark_prices = filter_prices(prices, benchmark["ticker"])
+    instrument_prices = get_prices(instrument["ticker"])  
+    benchmark_prices = get_prices(benchmark["ticker"])    
+
 
     print("=== MarketPulse ===")
     print()

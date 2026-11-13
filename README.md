@@ -202,6 +202,8 @@ python src/dashboard.py
 
 These are the two canonical CORE runtime commands.
 
+
+
 The instructor starter repository does not necessarily contain every later-stage student file on day one. Files appear progressively during the lab sequence.
 
 ## Installation
