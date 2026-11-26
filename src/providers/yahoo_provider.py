@@ -2,7 +2,7 @@ import yfinance as yf
 
 CANONICAL_TO_YAHOO = {
     "AAPL": "AAPL",
-    "SP500": "^GSPC",  
+    "SP500": "^GSPC",
 }
 
 
